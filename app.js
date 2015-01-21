@@ -62,11 +62,11 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-var server = app.listen(3000, function () {
+var server = app.listen(80, function () {
     var host = server.address().address
     var port = server.address().port
     if (process.send) process.send('online');
-    console.log('Example app listening at http://%s:%s', host, port)
+    console.log('App listening at http://%s:%s', host, port)
 })
 
 process.on('message', function(message) {
