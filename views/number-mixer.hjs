@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
-<html class="skrollr skrollr-desktop">
+<html>
 <head>
 <title>Number Mixer!  Mix some numbers...</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="javascripts/jquery.sortable.js"></script>
+<!-- <script src="javascripts/jquery.sortable.js"></script> -->
+<script src="javascripts/number-mixer.js"></script>
 <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
 <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
 </head>
@@ -12,9 +13,18 @@
 <style>
 	html,body{
 		font-family: 'Roboto Slab', serif;
+		font-size: 16px;
 		z-index: 0;
 		height: 100%;
 		background: #ddd;
+	}
+	.disabled{
+		-webkit-touch-callout: none;
+	    -webkit-user-select: none;
+	    -khtml-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
 	}
 
 	.btn {
@@ -28,7 +38,7 @@
 	  -moz-border-radius: 3;
 	  border-radius: 3px;
 	  color: #ffffff;
-	  font-size: 20px;
+	  font-size: 1.25em;
 	  padding: 10px 20px 10px 20px;
 	  text-decoration: none;
 	  cursor: pointer;r;
@@ -40,19 +50,42 @@
 		color: #333;*/
 	}
 
-	.block{
+	.block, .sortable-placeholder{
+		/*this will need to get set by javascript depending on board size*/
 		width: 10%;
-		height: 10vw;
+		height: 20%;
 		float: left;
 		margin: 0;
-		box-shadow: 1px 1px #333;
+	}
+
+	.targetBlock{
+		border: 2px red solid;
+	}
+
+	#boardWrapper{
+		width: 100%;
+		height: calc(100% - 60px);
+		position: relative;
+		top: 50px;
+
 	}
 
 	#board{
-		width: 100%;
-		position: relative;
-		top: 100px;
-		margin: 0 auto;
+		width: calc(100vw - 100px); 
+	    height: calc(56.25vw - 100px); /* 100/56.25 = 1.778 */
+	    max-height: calc(100vh - 100px);
+	    max-width: calc(177.78vh - 100px); /* 16/9 = 1.778 */
+	    margin: 0 auto !important;
+	    padding: 0 !important;
+	    position: absolute;
+	    top:20px;bottom:0; /* vertical center */
+	    left:0;right:0; /* horizontal center */
+	    list-style-type: none;
+	    list-style-position: inside;
+	}
+
+	.sortable-dragging{
+		/*add dragging state styles here*/
 	}
 
 	.piece{
@@ -60,7 +93,8 @@
 		height: 90%;
 		margin: 5%;
 		cursor: pointer;
-		transform: scale(-4px);
+		border-radius: 10px;
+		box-shadow: 1px 1px 2px #333;
 		-moz-animation-name: dropHeader;
 	    -moz-animation-iteration-count: 1;
 	    -moz-animation-timing-function: ease-in-out;
@@ -87,10 +121,13 @@
 	}
 	@-webkit-keyframes dropHeader {
 	    0% {
-	        -webkit-transform: scale(.8);
+	        -webkit-transform: scale(.5);
+	    }
+	    90% {
+	        -webkit-transform: scale(1.055);
 	    }
 	    100% {
-	        -webkit-transform: scale(1);
+	    	-webkit-transform: scale(1);
 	    }
 	}
 	@keyframes dropHeader {
@@ -104,14 +141,15 @@
 
 	.piece:before{
 		content: attr(data-number);
-		font-size: 70px;
+		font-size: 3em;
 		line-height: 0px;
 		position: relative; 
 		top: calc(50%); 
 	}
 
 	.red{
-		background-color: red;
+		background-color:red;
+
 	}
 
 	.green{
@@ -120,6 +158,7 @@
 
 	.blue{
 		background-color: blue;
+
 	}
 
 	.yellow{
@@ -129,110 +168,17 @@
 	.blank{
 		background-color: #aaa;
 		color: #aaa;
+		cursor: default;
+	}
+	.dragged-placeholder{
+		opacity: .4;
 	}
 </style>
-<script>
-$(function(){
-	//some defaults
-	var rowLength = 9;
-	var pieceTypes = 4;
-	var numOfBlanks = (rowLength+1) + pieceTypes;
-	var numOfPieces = (rowLength+1) * (pieceTypes + 1);
-	var colorsArray = ['green','blue','red','yellow'];
-
-
-	//board array
-	var pieces = [];
-	//create arrays of numbers
-	// 4 colors and 1 of blanks or 5 arrays total
-	var blank = [];
-	var green = [];
-	var blue = []
-	var red = [];
-	var yellow = [];
-
-	$(document).on('click','#startGame', function(){
-		startGame();
-	});
-
-	function startGame(){
-		$('#startGame').addClass('hide');
-		$('#wrapper').append(buildBoard());
-		setTimeout(populateBoard(), 500);
-		animatePieces();
-	}
-	function buildBoard(){
-		var html = [];
-		html.push('<div id="board" class="flush-full">');
-		for(var i = 1; i <= 5; i++){
-				for(var j = 1; j <= 10; j++){
-					html.push('<div class="block ' + i +'"></div>');
-				}
-		}
-		html.push('</div>')
-		return html.join("");
-	}
-	function populateBoard(){
-		// 4 colors
-		pieces.push(green,blue,red,yellow);
-		// 9 numbers per colors
-		for(var i = 0; i < pieces.length;i++){
-			for(var j = 1; j <= rowLength; j++){
-				pieces[i].push(j);
-			}
-		}
-		console.log(pieces);
-		// blanks
-		for(var i = 1; i <= numOfBlanks;i++){
-			blank.push(i);
-		}
-		// ad them to master array and colors array
-		pieces.push(blank);
-		colorsArray.push('blank');
-
-		console.log(pieces);
-
-		//put everything in the board
-		//select by index of <td>
-		//randomly select from multidimensional array
-		//make sure to delete from array every time. delete from top level once empty
-		var x = 0
-		var intervalId = setInterval(function(){
-			placePiece(x);
-			if(++x === numOfPieces){
-				window.clearInterval(intervalId);
-			}
-		}, 25);
-
-	}
-	function placePiece(index){
-		// random number of piece color
-		var num1 = Math.floor(Math.random() * pieces.length);
-		// use random type to pick color in array and get color string from color array
-		var randType = pieces[num1];
-		var color = colorsArray[num1];
-		// random number for piece number
-		var num2 = Math.floor(Math.random() * randType.length);
-		// get piece from array
-		var indPiece = randType[num2];
-		// get color string from color array
-		
-
-		var pieceHtml = '<div class="piece ' + color + '" data-number="' + randType[num2] + '"></div>';
-
-		$('.block:eq(' + index + ')').append(pieceHtml);
-		randType.splice(num2, 1);
-		console.log(color + ' ' + randType.length + ' : ' + num1 + '/' + num2);
-		if(randType.length == 0){
-			pieces.splice(num1,1);
-			colorsArray.splice(num1,1);
-		}
-	}
-});
-</script>
 <h1 class="tc" style="margin-bottom:30px;">Number Mixer</h1>
 <div id="wrapper" class="tc" style="position:fixed; height: 100%; width: 100%;">
+<div id="boardWrapper"></div>
 	<span id="startGame" class="btn mobile-full" style="position: relative; top: 40%; transform: translateY(-40%); width: 300px; display: inline-block;">Start New Game!</span>
+
 </div>
 </body>
 </html>

@@ -34,6 +34,7 @@ $.fn.sortable = function(options) {
 			$(options.connectWith).add(this).data('connectWith', options.connectWith);
 		}
 		items.attr('draggable', 'true').on('dragstart.h5s', function(e) {
+			items.parent().trigger('sortstart', {item: dragging});
 			if (options.handle && !isHandle) {
 				return false;
 			}
@@ -41,9 +42,14 @@ $.fn.sortable = function(options) {
 			var dt = e.originalEvent.dataTransfer;
 			dt.effectAllowed = 'move';
 			dt.setData('Text', 'dummy');
+			console.log(this);
+			
 			index = (dragging = $(this)).addClass('sortable-dragging').index();
-		}).on('dragend.h5s', function() {
+			// $(this).before(placeholder);
+			// $(dragging).replaceWith(placeholder.addClass('dragged-placeholder'));
+		}).attr('draggable', 'true').on('dragend.h5s', function() {
 			dragging.removeClass('sortable-dragging').show();
+			//gets rid of placeholder
 			placeholders.detach();
 			if (index != dragging.index()) {
 				items.parent().trigger('sortupdate', {item: dragging});
@@ -56,8 +62,10 @@ $.fn.sortable = function(options) {
 			if (!items.is(dragging) && options.connectWith !== $(dragging).parent().data('connectWith')) {
 				return true;
 			}
+			//where to put placeholder after drop and what to do with piece
 			if (e.type == 'drop') {
 				e.stopPropagation();
+				//puts dragged element after placeholder
 				placeholders.filter(':visible').after(dragging);
 				return false;
 			}
@@ -68,6 +76,7 @@ $.fn.sortable = function(options) {
 					placeholder.height(dragging.outerHeight());
 				}
 				dragging.hide();
+				//looks at where the target is
 				$(this)[placeholder.index() < $(this).index() ? 'after' : 'before'](placeholder);
 				placeholders.not(placeholder).detach();
 			} else if (!placeholders.is(this) && !$(this).children(options.items).length) {

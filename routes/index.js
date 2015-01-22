@@ -11,4 +11,8 @@ router.get('/', function(req, res) {
 router.get('/number-mixer', function(req, res) {
   	res.render('number-mixer', { title: 'Number-Mixer'});
 });
+/* GET radial-scroll demo. */
+router.get('/radial-scroll', function(req, res) {
+  	res.render('radial-scroll-demo', { title: 'Scroll in Circle'});
+});
 module.exports = router;
