@@ -15,4 +15,8 @@ router.get('/number-mixer', function(req, res) {
 router.get('/radial-scroll', function(req, res) {
   	res.render('radial-scroll-demo', { title: 'Scroll in Circle'});
 });
+
+router.get('/style-guide', function(req, res) {
+  	res.render('style-guide', { title: 'Style-Guide'});
+});
 module.exports = router;
