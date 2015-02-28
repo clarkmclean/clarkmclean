@@ -58,7 +58,7 @@
 		#logoSm{
 			font-size: 2em;
 			color: #fff;
-			margin-left: 30px;
+			margin-left: 10px;
 		}
 		.nav{
 			position: relative;
@@ -137,20 +137,10 @@
 			box-shadow: 2px 2px 10px #bbb;
 			margin-top: 3px;
 		}
-		#portfolio a:hover{
-			-webkit-transform: scale(1.2); /* Chrome, Safari, Opera */
-    		transform: scale(1.2;
-		}
-		@media (max-width: 767px) {
-			#logoSm{
-				font-size: 20px;
-				line-height: 50px;
-			}
-		}
 	</style>
             <div id="content">   
             	<div id="content-overlay" class="skrollable skrollable-between" data-0="opacity:.3;" data-50-top="opacity:1;" data--350-top="opacity:.8;"></div>
-            	<div class="fullBar p">
+            	<div class="fullBar">
                 	<span id="logo" data-t="Clark McLean" class="ts skrollable skrollable-between" data-target="#content-overlay" data-0="top:175px;" data--350-top="top:340px;">Clark McLean</span> 
             	</div>
             </div>
@@ -159,28 +149,27 @@
             		<div class="fullBar">
 	            		<span id="logoSm" data-t="Clark McLean" class="skrollable skrollable-between" data-380="opacity:0;" data-400="opacity:1;">Clark McLean</span>
 	            		<div class="center skrollable skrollable-between" data-0="bottom:25px;" data-450="bottom:-25px; "></div>
-	            		<i class="icon-menu fr"></i>
             		</div>
             	</div>
             </div>
             <div id="mainContent" class="fullBar skrollable skrollable-between" data-450="">
-            	<div class="grid-full pt2x" style="margin-top:50px;">
-            		<div class="grid-half mobile-full tc">
+            	<div class="flush-full pt2x" style="margin-top:50px;">
+            		<h1 class="no-mt">Front End Web Developer</h1>
+            		<div class="grid-half">
             			<img src="images/mephoto.jpg" style="width: 100%;"/>
             		</div>
-            		<div class="grid-half mobile-full tl">
-            			<h1 class="no-mt no-m">UI/UX Developer</h1>
-            			<p class="no-m">@ <a href="http://www.rcwilley.com" style="font-size: 20px">RC Willey Home Furnishings</a></p>
-            			<div class="flush-full pt" id="soc-icons">
-	            			<div class="grid-half tablet-full no-m">
-	            				<div class="mb pb no-ml">Portfolio</div>
+            		<div class="grid-half tl">
+            			<p>Front End Web Developer @<br/> <a href="http://www.rcwilley.com" style="font-size: 20px">RC Willey Home Furnishings</a></p>
+            			<div class="flush-full" id="soc-icons">
+	            			<div class="grid-half">
+	            				<div>Portfolio</div>
 		            			<a class="icon-github" href="https://github.com/clarkmclean/"></a>
 		            			<a class="icon-bitbucket" href="https://bitbucket.org/clarkmclean"></a>
 		            			<a class="icon-linkedin" href="https://www.linkedin.com/profile/view?id=53810324&trk=nav_responsive_tab_profile"></a>
 		            			<a class="icon-jsfiddle" alt="jsfiddle" href="http://jsfiddle.net/user/clarkmclean/fiddles/"></a>
 	        				</div>
-	        				<div class="grid-half tablet-full no-m">
-	        					<div class="mb pb no-ml">Social</div>
+	        				<div class="grid-half">
+	        					<div>Social</div>
 		            			<a class="icon-facebook-square" href="https://www.facebook.com/clarmac"></a>
 		            			<a class="icon-google-plus-square" href="https://plus.google.com/+ClarkMcLean/posts"></a>
 		            			<a class="icon-flickr" href="https://www.flickr.com/photos/127890909@N08/"></a>
@@ -189,67 +178,60 @@
             			</div>
             		</div>
             	</div>
-            	<div class="grid-full tc" id="skills">
+            	<div class="flush-full tc" id="skills">
             		<h2>Skills</h2>
-            		<div class="grid-fourth mobile-half">
+            		<div class="grid-third">
             			<h3>HTML/Sass</h3>
             			<div>
 	            			<span class="pefectly-subjective-skill-quantification">8.5</span>
 	        				<canvas id="html" width="400" height="400"></canvas>
         				</div>
         			</div>
-        			<div class="grid-fourth mobile-half">
-        				<h3>Javascript</h3>
+        			<div class="grid-third">
+        				<h3>JS/jQuery</h3>
         				<div>
 	        				<span class="pefectly-subjective-skill-quantification">6.5</span>
 	        				<canvas id="js" width="400" height="400"></canvas>
         				</div>
         			</div>
-        			<div class="grid-fourth mobile-half">
+        			<div class="grid-third">
         				<h3>Java</h3>
         				<div>
 	        				<span class="pefectly-subjective-skill-quantification">6.5</span>
 	        				<canvas id="j2ee" width="400" height="400"></canvas>
 	        			</div>
         			</div>
-        			<div class="grid-fourth mobile-half">
-        				<h3>Angular</h3>
-        				<div>
-	        				<span class="pefectly-subjective-skill-quantification">3.5</span>
-	        				<canvas id="angularchart" width="400" height="400"></canvas>
-	        			</div>
-        			</div>
             	</div>
-            	<div class="grid-full" id="portfolio">
+            	<div class="flush-full" id="portfolio">
             		<h2>Portfolio</h2>
             		<h3>RC Willey</h3>
-            		<a href="http://www.rcwilley.com" class="grid-fifth a250" target="_blank">
+            		<a href="http://www.rcwilley.com" class="grid-fifth" target="_blank">
             			<img src="images/rcwilley-home.jpg">
             		</a>
-            		<a href="http://www.rcwilley.com/account" class="grid-fifth a250" target="_blank">
+            		<a href="http://www.rcwilley.com/account" class="grid-fifth" target="_blank">
             			<img src="images/rcwilley-logo.jpg">
             		</a>
-            		<a href="http://www.rcwilley.com/Shopping-Cart.jsp" class="grid-fifth a250" target="_blank">
+            		<a href="http://www.rcwilley.com/Shopping-Cart.jsp" class="grid-fifth" target="_blank">
             			<img src="images/rcwilley-checkout.jpg">
             		</a>
-            		<a href="http://www.rcwilley.com/Shopping-Cart.jsp" class="grid-fifth a250" target="_blank">
+            		<a href="http://www.rcwilley.com/Shopping-Cart.jsp" class="grid-fifth" target="_blank">
             			<img src="images/rcwilley-cart.jpg">
             		</a>
-            		<a href="http://www.rcwilley.com/" class="grid-fifth a250" target="_blank">
+            		<a href="http://www.rcwilley.com/" class="grid-fifth" target="_blank">
             			<img src="images/rcwilley-viewer.jpg">
             		</a>
             		<h3>Other (mostly in progress)</h3>
             		<h4><a href="https://github.com/clarkmclean/"><i class="icon-github"></i>Visit my github account to watch my progress on these:</a></h4>
-        			<a href="/number-mixer" class="grid-third no-mt a250">
+        			<a href="/number-mixer" class="grid-third no-mt">
         			<h5 class="no-ml no-mb">Number Mixer</h5>
         				<img src="images/number-mixer-preview.jpg">
         			</a>
-        			<a href="/radial-scroll" class="grid-third no-mt a250" >
+        			<a href="/radial-scroll" class="grid-third no-mt" >
         			<h5 class="no-ml no-mb">Radial Scroller</h5>
     					<img src="images/radial-scroll-preview.jpg" style="">
         			</a>
             	</div>
-            	<div class="grid-full">
+            	<div class="flush-full">
             		<h2>Experience</h2>
             		<h3>RC Willey Home Furnishings <span>November 2012 - Present</span></h3>
             		<ul class="c">
@@ -270,11 +252,11 @@
         				</ul>
             		<h3>
             	</div>
-            	<div class="grid-full">
+            	<div class="flush-full">
             		<h2>Education</h2>
             		<h3>BYU - Idaho <span>August 2009 - July 2012</span></h3>
             	</div>
-            	<div class="grid-full">
+            	<div class="flush-full">
             	<h2>App Development</h2>
             	<div class="grid-5">
 	            	<img class="flush-full" src="images/app.png"/>
@@ -306,7 +288,7 @@
 			        value: 85,
 			        color:"#F7464A",
 			        highlight: "#FF5A5E",
-			        label: "HTML/CSS"
+			        label: "JAVA"
 			    },
 			    {
 			        value: 15,
@@ -319,7 +301,7 @@
 			        value: 65,
 			        color:"#F7464A",
 			        highlight: "#FF5A5E",
-			        label: "Javascript"
+			        label: "JAVA"
 			    },
 			    {
 			        value: 35,
@@ -340,19 +322,6 @@
 			        highlight: "#efefef",
 			    }
 			]
-			var angularchart = [
-			    {
-			        value: 70,
-			        color:"#F7464A",
-			        highlight: "#FF5A5E",
-			        label: "JAVA"
-			    },
-			    {
-			        value: 30,
-			        color: "#efefef",
-			        highlight: "#efefef",
-			    }
-			]
 			var ctx = document.getElementById("html").getContext("2d");
 			var myNewChart = new Chart(ctx).Doughnut(html);
 
@@ -361,9 +330,6 @@
 
 			var ctx = document.getElementById("j2ee").getContext("2d");
 			var myNewChart = new Chart(ctx).Doughnut(j2ee);
-
-			var ctx = document.getElementById("angularchart").getContext("2d");
-			var myNewChart = new Chart(ctx).Doughnut(angularchart);
 	</script>
     </body>
 </html>
