@@ -27,6 +27,34 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      // If you want to use styled components, in conjunction to Material-UI, you should:
+      // - Change the injection order
+      // - Add the plugin
+      options: {
+        // stylesProvider: {
+        //   injectFirst: true,
+        // },
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: `Montserrat`,
+                variants: [`300`, `400`, `500`],
+              },
+            ],
+          },
+        },
+      },
+      // 'gatsby-plugin-styled-components',
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
